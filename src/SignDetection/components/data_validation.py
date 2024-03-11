@@ -57,6 +57,7 @@ class DataValidation:
 
             if status :
                 shutil.copy(self.data_ingestion_artifacts.zip_file_path ,os.getcwd())
+                
             return data_validation_artifacts
 
         except Exception as e:

@@ -8,14 +8,14 @@ import yaml as yaml
 import base64
 
 @ensure_annotations
-def read_yaml(path_to_yaml :Path):
+def read_yaml(path_to_yaml :str):
     """Code will run yaml file 
     args ==1] path_to_yaml :-path where your yaml file stored 
     """
     try:
         with open(path_to_yaml ,'rb') as yaml_file:
             content = yaml.safe_load(yaml_file)
-            return str(content) 
+            return content 
     except Exception as e:
         logging.info(f"Unable to read yaml file{path_to_yaml}")
         raise CustomException(e ,sys)

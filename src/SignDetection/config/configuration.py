@@ -1,4 +1,4 @@
-from src.SignDetection.entity.config_entity import DataIngestionConfig ,DataValidationConfig
+from src.SignDetection.entity.config_entity import DataIngestionConfig ,DataValidationConfig ,ModelTrainingConfig
 from src.SignDetection.constant import *
 from src.SignDetection.utils import *
 import os ,sys
@@ -31,5 +31,13 @@ class ConfigurationManager():
             data_validation_file_required=DATA_VALIDATION_ALL_FILE_REQUIRED
         )
         return data_validation_config
+    
+    def get_model_training_config(self):
+        model_training_config = ModelTrainingConfig(
+            model_trainer_dir= os.path.join(ROOT_DIR ,ARTIFACT_DIR ,MODEL_TRAINER_DIR_NAME ),
+            weight_name= MODEL_TRAINER_PRETRAINED_WEIGHT_NAME ,
+            no_epochs= MODEL_TRAINER_NO_EPOCHS ,
+            batch_size= MODEL_TRAINER_BATCH_SIZE
+        )
 
-
+        return model_training_config
