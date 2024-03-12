@@ -27,4 +27,10 @@ DATA_VALIDATION_ALL_FILE_REQUIRED :list= ['train' ,'test' ,'data.yaml']
 MODEL_TRAINER_DIR_NAME :str = "Model_Trainer"
 MODEL_TRAINER_PRETRAINED_WEIGHT_NAME :str = "yolov5s.pt"
 MODEL_TRAINER_NO_EPOCHS :int =1 
-MODEL_TRAINER_BATCH_SIZE :int =16
+MODEL_TRAINER_BATCH_SIZE :int =16 
+
+
+
+#constant related to flask api
+APP_HOST = "0.0.0.0"
+APP_PORT = 8000

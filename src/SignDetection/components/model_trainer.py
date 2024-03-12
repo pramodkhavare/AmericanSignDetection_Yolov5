@@ -13,14 +13,12 @@ class ModelTrainer:
 
     def initiate_model_trainer(self)->ModelTrainerArtifact :
         logging.info("Model Training step started")
-        print(os.getcwd())
         try:
-            logging.info("Unzipping data") 
 
             #for bash us -
             logging.info("Unzipping data")
-            os.system("unzip data.zip")
-            os.system("rm data.zip")
+            os.system("unzip Data.zip")
+            os.system("rm Data.zip")
 
             #for powershell(windows)
             # with zipfile.ZipFile('Data.zip', 'r') as zip: 
@@ -46,7 +44,18 @@ class ModelTrainer:
             os.system(f"cd yolov5/ && python train.py --img 416 --batch {self.config.batch_size} --epochs {self.config.no_epochs} --data ../data.yaml --cfg ./models/custom_yolov5s.yaml --weights {self.config.weight_name} --name yolov5s_results  --cache")
             os.system("cp yolov5/runs/train/yolov5s_results/weights/best.pt yolov5/")
             os.makedirs(self.config.model_trainer_dir, exist_ok=True)
-            os.system(f"cp yolov5/runs/train/yolov5s_results/weights/best.pt {self.config.model_trainer_dir}")
+
+
+            print("***********************")
+            print(self.config.model_trainer_dir)
+            print("***********************")
+            print(os.getcwd())
+            print("***********************")
+
+
+            # os.system(f"cp yolov5/runs/train/yolov5s_results/weights/best.pt {self.config.model_trainer_dir}/")
+            os.system(f"cp yolov5/runs/train/yolov5s_results/weights/best.pt ../{self.config.model_trainer_dir}/")
+
 
             # os.system("del yolov5/runs")
             # os.system("del train")
@@ -54,7 +63,7 @@ class ModelTrainer:
             # os.system("del data.yaml")
             os.system("rm -rf yolov5/runs")
             os.system("rm -rf train")
-            os.system("rm -rf valid")
+            os.system("rm -rf test")
             os.system("rm -rf data.yaml")
 
 
@@ -64,9 +73,9 @@ class ModelTrainer:
 
             logging.info("Exited initiate_model_trainer method of ModelTrainer class")
             logging.info(f"Model trainer artifact: {model_trainer_artifact}")
+            print(self.config.model_trainer_dir)
 
-
-            print("Pramodd")
+            
             return model_trainer_artifact
 
 

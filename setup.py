@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from typing import List
 
 PROJECT_NAME = "SignDetection"
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 DESCRIPTION = "This is our Deep learning project in modular coding"
 AUTHOR_NAME = "Pramod Khavare"
 AUTHOR_EMIL = "pramodkhavare2000@gmail.com"
