@@ -9,7 +9,7 @@ from src.SignDetection.constant import APP_HOST ,APP_PORT
 app = Flask(__name__)
 CORS(app)  
 
-Pramod
+
 
 class ClientApp:
     def __init__(self):
