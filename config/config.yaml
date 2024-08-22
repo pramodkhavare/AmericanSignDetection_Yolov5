@@ -1,0 +1,37 @@
+training_pipeline_config :
+  pipeline_name : signdetection 
+  artifact_dir  : artifact
+
+data_ingestion_config :
+  data_ingestion_dir  : 'data_ingestion'
+  dataset_download_url: "https://github.com/entbappy/Branching-tutorial/raw/master/Sign_language_data.zip"
+  ingested_dir        : ingested_data 
+
+data_validation_config :
+  data_validation_dir  : 'data_validation'
+  schema_dir           :  'config'
+  schema_file_name     : 'schema.yaml' 
+  report_file_name     : 'status.json'
+  accepted_data_dir_name : 'Accepted_data'
+  rejected_data_dir_name : 'Rejected_data' 
+
+model_training_config :
+  trained_model_main_dir_name : model_training
+  trained_model_dir : trained_model 
+  pretrained_model_weight_name : yolov5s.pt
+  epochs : 1 #for training in local I am taking only 10 epochs
+  batch_size : 16
+
+
+model_pusher_config :
+  bucket_name : "american_sign_language"
+  model_name : 'best.pt'
+
+
+# model_evaluation_config :
+#   model_evaluation_file_name : model_evaluation.yaml
+
+# model_pusher_config :
+#   export_dir_path : saved_models
+#   export_file_name : saved_model.pkl
+

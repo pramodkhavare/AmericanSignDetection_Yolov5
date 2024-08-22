@@ -7,6 +7,9 @@ class DataIngestionArtifacts:
 @dataclass(frozen=True)
 class DataValidationArtifacts:
     data_validation_status :bool
+    accepted_folder_path : str 
+    rejected_folder_path :str 
+    report_file_path :str 
 
 
 @dataclass

@@ -162,3 +162,4 @@ cython_debug/
 artifacts/*
 Collected-images
 test_images
+artifact/*

@@ -5,6 +5,11 @@ from datetime import datetime
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
+class TrainingPipelineConfig:
+    artifact_dir :str 
+    
+    
+@dataclass(frozen=True)
 class DataIngestionConfig:
     data_ingestion_dir :str 
     feature_store_file_path :str 
@@ -14,9 +19,11 @@ class DataIngestionConfig:
 
 @dataclass(frozen=True)
 class DataValidationConfig:
-    data_validation_dir_name :str 
-    data_validation_status_file :str
-    data_validation_file_required: list
+    data_validation_dir :str 
+    data_validation_status_file :str 
+    accepted_data_dir :str 
+    rejected_data_dir :str 
+
 
 
 @dataclass(frozen=True)

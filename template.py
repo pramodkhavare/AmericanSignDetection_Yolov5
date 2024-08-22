@@ -6,10 +6,12 @@ import logging
 
 logging.basicConfig(level=logging.INFO , format= "[%(asctime)s]:%(message)s")
 
-package_name = 'DignDetection'
+package_name = 'SignDetection'
 
 list_of_files = [
     ".github/workflows/.gitkeep",
+    "config/config.yaml" ,
+    "config/schema.yaml" ,
     f"src/{package_name}/__init__.py",
     f"src/{package_name}/components/__init__.py",
     f"src/{package_name}/pipeline/__init__.py",
@@ -19,10 +21,11 @@ list_of_files = [
     f"src/{package_name}/entity/__init__.py",
     f"src/{package_name}/exception/__init__.py",
     f"src/{package_name}/logger/__init__.py",
-    f"src/__init__.py"
+    f"src/__init__.py" ,
     "requirements.txt",
     "setup.py",
     "research/trails.ipynb"
+    
 ]
 
 #cfg -configuration

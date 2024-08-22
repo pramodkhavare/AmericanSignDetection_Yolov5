@@ -14,3 +14,4 @@ data_ingestion_artifacts = data_ingestion.initiate_data_ingestion()
 get_data_validation = config.get_data_validation_config()
 
 
+# D:\Data Science\ComputerVision\AmericanSignDetection_Yolov5\src\SignDetection\pipeline\stage01_data_ingestion.py

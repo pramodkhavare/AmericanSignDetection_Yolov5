@@ -1,6 +1,6 @@
 from src.SignDetection.components.data_validation import DataValidation 
 from src.SignDetection.components.data_ingestion import DataIngestion
-from src.SignDetection.components.model_trainer import ModelTrainer
+from src.SignDetection.components.model_trainer1 import ModelTrainer
 from src.SignDetection.logger import logging
 from src.SignDetection.exception import CustomException
 from src.SignDetection.config.configuration import ConfigurationManager

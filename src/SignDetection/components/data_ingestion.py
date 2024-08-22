@@ -13,12 +13,14 @@ class DataIngestion:
 
         except Exception as e:
             raise CustomException( e,sys )
-        
+      
     def download_data(self):
         try:
+            
+
             dataset_url = self.config.data_download_url
             zip_download_dir = self.config.data_ingestion_dir 
-
+            
             os.makedirs(zip_download_dir ,exist_ok= True)
             data_file_name = 'Data.zip'
             zip_file_path = os.path.join(zip_download_dir ,data_file_name)
