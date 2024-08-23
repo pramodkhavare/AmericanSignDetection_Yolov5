@@ -5,9 +5,9 @@ from src.SignDetection.config.configuration import ConfigurationManager
 from src.SignDetection.components.data_validation import DataValidation 
 from src.SignDetection.components.data_ingestion import DataIngestion
 from src.SignDetection.components.model_trainer import ModelTrainer 
-from src.SignDetection.entity.artifact_entity import DataIngestionArtifacts ,DataValidationArtifacts ,ModelTrainerArtifact
-
-    
+from src.SignDetection.components.model_pusher import ModelPusher
+from src.SignDetection.entity.artifact_entity import DataIngestionArtifacts ,DataValidationArtifacts ,ModelTrainerArtifact ,ModelPusherArtifacts
+from src.SignDetection.config.s3_operations import S3Operation
     
 class Pipeline:
     def __init__(self ,config : ConfigurationManager ):
@@ -62,11 +62,32 @@ class Pipeline:
         except Exception as e:
             raise CustomException(e ,sys) from e 
         
+    def start_model_pusher(self, model_training_artifacts :ModelTrainerArtifact ,
+                           s3: S3Operation)->ModelPusherArtifacts:
+        try:
+            model_pusher_config = self.config.get_model_pusher_config()
+            self.model_training_artifacts = model_training_artifacts
+            model_pusher = ModelPusher(
+                model_training_artifact= self.model_training_artifacts,
+                model_pusher_config= model_pusher_config ,
+                s3= s3
+            ) 
+            model_pusher_artifacts = model_pusher.initiate_model_pusher()
+            return model_pusher_artifacts
+        except Exception as e:
+            raise CustomException(e ,sys) from e 
+        
     def run_pipeline(self):
         try:
             data_ingestion_artifacts = self.start_data_ingestion() 
             data_validation_artifacts = self.start_data_validation(data_ingestion_artifacts= data_ingestion_artifacts)
-            model_training_artifacts = self.start_model_training(data_validation_artifacts= data_validation_artifacts)
+            
+            if data_validation_artifacts.data_validation_status :
+                model_training_artifacts = self.start_model_training(data_validation_artifacts= data_validation_artifacts)
+                # model_pusher_artifacts = self.start_model_pusher(model_training_artifacts= model_training_artifacts,
+                #                                                  s3= S3Operation())
+            else:
+                raise Exception ('Unable to Train model due to data is not available in necessary format')
         except Exception as e:
             raise CustomException(e ,sys) from e
     

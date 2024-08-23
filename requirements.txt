@@ -6,7 +6,9 @@ from-root==1.0.2
 gdown
 flask-cors
 flask
-
+boto3
+botocore
+mypy_boto3_s3
 
 # YOLOv5 requirements
 # Usage: pip install -r requirements.txt

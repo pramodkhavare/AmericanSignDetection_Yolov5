@@ -31,4 +31,10 @@ class ModelTrainingConfig:
     model_trainer_dir :str 
     weight_name :str 
     no_epochs :int 
-    batch_size :int
+    batch_size :int 
+    
+
+@dataclass(frozen=True)
+class ModelPusherConfig:
+    bucket_name :str 
+    s3_model_path :str 

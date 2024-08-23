@@ -37,17 +37,34 @@ def write_yaml_file(file_path :str ,content: object ,replace: bool =False)->None
         raise CustomException(e ,sys)
     
 
-def decodeImage(imgstring ,filename):
-    """
-    To upload image you need to give imaage in bs54 format
-    """
-    imgdata = base64.b64decode(imgstring)
-    with open("./data/" + filename , 'wb') as f :
-        f.write(imgdata)
-        f.close()
 
-def encodeImageIntoBase64(imagePath):
-    with open (imagePath , 'rb') as f:
+# def decodeImage(imgstring, fileName):
+#     print(123345)
+#     imgdata = base64.b64decode(imgstring)
+#     print('IMG')
+#     with open("../data/" + fileName, 'wb') as f:
+#         print(12334)
+#         f.write(imgdata)
+#         f.close()
+import base64
+import base64
+import os
+
+def decodeImage(imgstring, fileName):
+    directory = "./data/"
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    # Decode the base64 string
+    imgdata = base64.b64decode(imgstring)
+    # Write the decoded data to a file
+    filePath = os.path.join(directory, fileName)
+    with open(filePath, 'wb') as f:
+        f.write(imgdata)
+
+
+def encodeImageIntoBase64(croppedImagePath):
+    with open(croppedImagePath, "rb") as f:
         return base64.b64encode(f.read())
 
 @ensure_annotations

@@ -14,4 +14,9 @@ class DataValidationArtifacts:
 
 @dataclass
 class ModelTrainerArtifact:
-    trained_model_file_path: str
+    trained_model_file_path: str 
+    
+@dataclass(frozen=True)
+class ModelPusherArtifacts:
+    bucket_name : str 
+    s3_model_path :str

@@ -2,40 +2,50 @@ from src.SignDetection.utils import decodeImage ,encodeImageIntoBase64
 from flask import Flask ,request ,jsonify ,render_template ,Response 
 from flask_cors import CORS ,cross_origin 
 from src.SignDetection.config.configuration import ConfigurationManager
-from src.SignDetection.pipeline.training_pipeline import TrainPipeline
+from src.SignDetection.pipeline.training_pipeline import Pipeline
 import os ,sys
-from src.SignDetection.constant import APP_HOST ,APP_PORT
+from src.SignDetection.constant import APP_HOST ,APP_PORT 
+from src.SignDetection.exception import CustomException
 
 app = Flask(__name__)
 CORS(app)  
 
 
-
 class ClientApp:
     def __init__(self):
-        self.filename = "inputImage.jpg"
+        self.filename = "inputImage.jpg" # imagae will save from these name
 
 
-    
+
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    try:
+        return render_template("index.html")
+    except Exception as e:
+        raise CustomException(e,sys) from e
 
+
+@app.route("/train")
+def trainRoute():
+    try:
+        pipeline = Pipeline(config= ConfigurationManager())
+        pipeline.run()
+        return 'Train Successfully'   
+    except Exception as e:
+        raise CustomException(e,sys) from e
 
 
 @app.route("/predict", methods=['POST','GET'])
 @cross_origin()
 def predictRoute():
     try:
-        image = request.json['image']
+        image = request.json['image'] 
         decodeImage(image, clApp.filename)
-
-        os.system("cd yolov5/ && python detect.py --weights best.pt --img 416 --conf 0.5 --source ../data/inputImage.jpg")
-
+        os.system("cd yolov5/ && python detect.py --weights my_model.pt --img 416 --conf 0.5 --source ../data/inputImage.jpg")
         opencodedbase64 = encodeImageIntoBase64("yolov5/runs/detect/exp/inputImage.jpg")
         result = {"image": opencodedbase64.decode('utf-8')}
-        os.system("rm -rf yolov5/runs")
+        os.system('rmdir /S /Q yolov5\\runs')
 
     except ValueError as val:
         print(val)
@@ -70,4 +80,4 @@ def predictLive():
 
 if __name__ == "__main__":
     clApp = ClientApp()
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=8081)

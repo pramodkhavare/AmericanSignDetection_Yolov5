@@ -1,4 +1,4 @@
-from src.SignDetection.entity.config_entity import DataIngestionConfig ,DataValidationConfig ,ModelTrainingConfig ,TrainingPipelineConfig
+from src.SignDetection.entity.config_entity import DataIngestionConfig ,DataValidationConfig ,ModelTrainingConfig ,TrainingPipelineConfig ,ModelPusherConfig
 from src.SignDetection.constant import *
 from src.SignDetection.utils import *
 import os ,sys
@@ -109,12 +109,22 @@ class ConfigurationManager():
                 no_epochs= no_epochs ,
                 batch_size= batch_size
             ) 
-            print(1234)
-            print(model_training_config)
+
             return model_training_config
         
         except Exception as e:
             raise CustomException (e ,sys) from e
         
-        
+    def get_model_pusher_config(self ):
+        try:
+            config = self.config_info[MODEL_PUSHER_CONFIG_KEY] 
+            bucket_name = config[BUCKET_NAME_KEY] 
+            s3_model_path = config[MODEL_NAME_KEY]
+            model_pusher_config = ModelPusherConfig(
+                bucket_name = bucket_name ,
+                s3_model_path=  s3_model_path
+            )
+            return model_pusher_config
+        except Exception as e:
+            raise CustomException (e ,sys) from e
   

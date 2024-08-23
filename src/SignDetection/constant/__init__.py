@@ -49,6 +49,12 @@ EPOCHS = "epochs"
 BATCH_SIZE = "batch_size"
 
 
+#VARIABLE RELATED WITH MODEL PUSHER
+MODEL_PUSHER_CONFIG_KEY = 'model_pusher_config'
+BUCKET_NAME_KEY  = 'bucket_name'
+MODEL_NAME_KEY   = 'model_name'
+
+
 #constant related to flask api
 APP_HOST = "0.0.0.0"
 APP_PORT = 8000
